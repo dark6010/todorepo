@@ -1,44 +1,26 @@
-<template>
-  <v-card
-    class="mx-auto"
-    max-width="344"
-  >
-    <v-card-text>
-      <div>Tareas</div>
-      <p class="text-h4 blue--text">
-        Formulario
-      </p>
-    </v-card-text>
-    <v-form v-model="valid">
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-        >
-          <v-text-field
-            label="Title"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col
-          cols="12"
-        >
-          <v-text-field
-            label="Descripction"
-            required
-          ></v-text-field>
-        </v-col>
+<template lang="pug">
+  v-card(max-width='350').mx-auto
+    v-card-title
+        v-card-text
+            div Tareas
+            p.text-h4.blue--text Formulario
+    v-form
+        v-container
+            v-text-field(label='Title' required='')
+            v-text-field(label='Descripction' required='')
+            v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='auto')
+                template(v-slot:activator='{ on, attrs }')
+                    v-text-field(v-model='date' label='Picker without buttons' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
+                v-date-picker(v-model='date' @input='menu2 = false')
 
-      </v-row>
-
-    </v-container>
-    </v-form>
-    <v-card-actions class="d-flex justify-end">
-      <v-btn
-        color="primary"
-      >
-      AÑADIR
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+            v-card-actions.d-flex.justify-space-between
+                v-btn(color='primary') A&Ntilde;ADIR
 </template>
+<script>
+  export default {
+    data: () => ({
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      menu2: false,
+    }),
+  }
+</script>

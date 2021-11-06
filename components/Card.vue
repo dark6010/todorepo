@@ -4,6 +4,7 @@
     color="yellow"
     max-width="400"
     height="auto"
+    light
     
   >
     <v-card-title>
